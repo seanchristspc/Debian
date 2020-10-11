@@ -1,0 +1,128 @@
+set nocompatible
+
+set backspace=indent,eol,start
+
+set history=1000
+
+set showcmd
+
+set laststatus=2
+
+set wildmenu
+
+set ruler
+
+set cursorline
+
+"set autoindent
+set smartindent
+
+set hlsearch
+
+set encoding=utf-8
+
+set spell
+
+"set tabstop=4
+
+set foldenable			"Enable folding
+set foldlevelstart=10 	"Open most of the folds by default. If set to 0, all folds will be closed.
+set foldnestmax=10		"Folds can be nested. Setting a max value protects you from too many folds.
+set foldmethod=manual		"Define the type of folding.
+
+"set foldmethod=syntax
+
+"set foldlevelstart=1
+
+"let perl_fold=1		" Perl
+"let per_fold_block=1		" Fold blocks in if statements, etc. in Perl
+"let sh_fold_enable=1		" sh - enable function folding
+"let vimsyn_folding='af'	" Vim script
+"let r_syntax_folding=1		" R
+"let ruby_fold=1		" Ruby
+"let php_folding=1		"PHP
+"let javaScript_fold=1		"JavaScript
+"let xml_syntax_folding=1	"XML
+
+
+
+set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
+
+set directory=$HOME/.vim/swp//
+
+set backupdir=~/.vim/.backup//
+
+set dictionary+=~/.vim/dictionary/dic.txt
+
+" java tags
+set tags=/usr/local/oracle-java-8/jdk-8u251-linux-x64/jdk1.8.0_251/javasrc/java/tags
+set tags+=/usr/include/c++/8/cpptags
+set tags+=/usr/include/ctags
+
+" add other tags
+set autochdir
+
+syntax enable
+
+filetype off		" required
+
+" set the runtime path to include Vundle and initialize
+
+set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/myOwnsnippets/
+set runtimepath+=~/.vim/bundle/vim-snippets/UltiSnips/
+
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+" let Vundle manage Vundle, required
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'wellle/targets.vim'
+"Plugin 'vim-latex/vim-latex'
+Plugin 'lervag/vimtex'
+Plugin 'sirver/ultisnips' "nice
+Plugin 'honza/vim-snippets' 
+
+"Wed 11 Mar 2020 11:44:21 PM CST cancle
+"Thu 12 Mar 2020 09:34:12 AM CST back
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()		" required
+
+filetype plugin indent on	" required
+
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+
+" UltiSnips Setting
+"
+let g:UltiSnipsSnippetDirectories=["UltiSnips","myOwnsnippets"]
+
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+
+
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+let g:netrw_liststyle = 3
+
+
+
+
+
+" make . to work with visually selected lines
+vnoremap . :normal.<CR>
+
+" Move visual selection
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+	
+
