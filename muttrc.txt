@@ -60,8 +60,6 @@ set imap_passive
 set timeout=10
 
 
-
-
 #set abort_unmodified=yes	# automatically abort replies if I don't
 				# change the message
 #set alias_file=~/.config/mutt/aliases	# where I keep my aliases
