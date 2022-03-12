@@ -19,9 +19,20 @@ set smartindent
 
 set hlsearch
 
+" avoid showing many @ for long lines  
+set display+=lastline
+
 set encoding=utf-8
 
-set spell
+"set spell
+
+set undofile
+
+" encoding set
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
+set number
 
 "set tabstop=4
 
@@ -52,56 +63,86 @@ set directory=$HOME/.vim/swp//
 
 set backupdir=~/.vim/.backup//
 
+set undodir =~/.vim/.undo//
+
 set dictionary+=~/.vim/dictionary/dic.txt
 
-" java tags
-set tags=/usr/local/oracle-java-8/jdk-8u251-linux-x64/jdk1.8.0_251/javasrc/java/tags
-set tags+=/usr/include/c++/8/cpptags
-set tags+=/usr/include/ctags
+" Ctags search
+set tags=./tags;,tags
 
-" add other tags
-set autochdir
 
 syntax enable
 
+"filetype on		" required
 filetype off		" required
 
-" set the runtime path to include Vundle and initialize
-
-set rtp+=~/.vim/bundle/Vundle.vim
 set runtimepath+=~/.vim/myOwnsnippets/
-set runtimepath+=~/.vim/bundle/vim-snippets/UltiSnips/
-
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-" let Vundle manage Vundle, required
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'wellle/targets.vim'
-"Plugin 'vim-latex/vim-latex'
-Plugin 'lervag/vimtex'
-Plugin 'sirver/ultisnips' "nice
-Plugin 'honza/vim-snippets' 
-
-"Wed 11 Mar 2020 11:44:21 PM CST cancle
-"Thu 12 Mar 2020 09:34:12 AM CST back
+set runtimepath+=~/.vim/plugged/vim-snippets/UltiSnips/
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()		" required
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-filetype plugin indent on	" required
+" Make sure you use single quotes
 
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'lervag/vimtex'
+Plug 'wakatime/vim-wakatime'
+
+
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" On-demand loading
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-default branch
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+"Plug '~/my-prototype-plugin'
+
+" Initialize plugin system
+call plug#end()
+
 
 let g:tex_flavor='latex'
+
+"let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
+"let g:vimtex_compiler_latexrun_engines ={'_':'xelatex'}
+
+
+"let g:vimtex_compiler_latexmk_engines = {'_':'-pdflatex'}
+"let g:vimtex_compiler_latexrun_engines ={'_':'pdflatex'}
+
+let g:vimtex_compiler_latexmk_engines = {'_':'-lualatex'}
+let g:vimtex_compiler_latexrun_engines ={'_':'lualatex'}
+
+
 let g:vimtex_view_method='zathura'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
 let g:vimtex_quickfix_mode=0
 
-" UltiSnips Setting
-"
+"UltiSnips Setting
+
 let g:UltiSnipsSnippetDirectories=["UltiSnips","myOwnsnippets"]
 
 let g:UltiSnipsExpandTrigger='<tab>'
@@ -112,17 +153,3 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_liststyle = 3
-
-
-
-
-
-" make . to work with visually selected lines
-vnoremap . :normal.<CR>
-
-" Move visual selection
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-	
-
