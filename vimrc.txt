@@ -4,6 +4,7 @@ set backspace=indent,eol,start
 
 set history=1000
 
+"Show (partial) command in the last line of the screen. 
 set showcmd
 
 set laststatus=2
@@ -17,21 +18,30 @@ set cursorline
 "set autoindent
 set smartindent
 
+
+"When there is a previous search pattern, highlight all its matches.
+"When you get bored looking at the highlighted matches, you can turn it
+"off with |:nohlsearch|.  This does not change the option value, as
 set hlsearch
 
-" avoid showing many @ for long lines  
+"While typing a search command, show where the pattern, as it was typed
+"so far, matches.  The matched string is highlighted.  If the pattern
+"is invalid or not found, nothing is shown.  The screen will be updated
+"often, this is only useful on fast terminals.
+set incsearch
+
+"Avoid showing many @ for long lines  
 set display+=lastline
 
-set encoding=utf-8
 
 "set spell
 
-set undofile
 
-" encoding set
+"Encoding set
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
+"Shown the line number 
 set number
 
 "set tabstop=4
@@ -63,11 +73,12 @@ set directory=$HOME/.vim/swp//
 
 set backupdir=~/.vim/.backup//
 
+set undofile
 set undodir =~/.vim/.undo//
 
 set dictionary+=~/.vim/dictionary/dic.txt
 
-" Ctags search
+"Ctags search
 set tags=./tags;,tags
 
 
@@ -80,46 +91,46 @@ set runtimepath+=~/.vim/myOwnsnippets/
 set runtimepath+=~/.vim/plugged/vim-snippets/UltiSnips/
 
 
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
+"Specify a directory for plugins
+"- For Neovim: stdpath('data') . '/plugged'
+"- Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
+"Make sure you use single quotes
 
-" Multiple Plug commands can be written in a single line using | separators
+"Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 Plug 'wakatime/vim-wakatime'
 
 
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
 
-" Any valid git URL is allowed
+"Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
-" On-demand loading
+"On-demand loading
 "Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-" Using a non-default branch
+"Using a non-default branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 "Plug 'fatih/vim-go', { 'tag': '*' }
 
-" Plugin options
+"Plugin options
 "Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
-" Plugin outside ~/.vim/plugged with post-update hook
+"Plugin outside ~/.vim/plugged with post-update hook
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Unmanaged plugin (manually installed and updated)
+"Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
 
-" Initialize plugin system
+"Initialize plugin system
 call plug#end()
 
 
