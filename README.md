@@ -5,7 +5,7 @@
 ## vim config
 Type: 		text editor
 
-Filename: 	vimrc.txt
+Filename: 	vimrc
 
 ---
 
@@ -14,7 +14,7 @@ Filename: 	vimrc.txt
 
 Type: 		Terminal
 
-Filename: 	zshrc.txt
+Filename: 	zshrc
 
 
 ---
@@ -23,7 +23,6 @@ Filename: 	zshrc.txt
 ## mutt config
 Type:		email
 
-Filename:	muttrc.txt
-
+Filename:	muttrc
 
 ---
