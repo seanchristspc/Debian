@@ -7,6 +7,9 @@ set history=1000
 "Show (partial) command in the last line of the screen. 
 set showcmd
 
+"colorscheme darkblue
+colorscheme default
+
 set laststatus=2
 
 set wildmenu
@@ -15,36 +18,36 @@ set ruler
 
 set cursorline
 
-"set autoindent
-set smartindent
-
-
-"When there is a previous search pattern, highlight all its matches.
-"When you get bored looking at the highlighted matches, you can turn it
-"off with |:nohlsearch|.  This does not change the option value, as
-set hlsearch
-
 "While typing a search command, show where the pattern, as it was typed
 "so far, matches.  The matched string is highlighted.  If the pattern
 "is invalid or not found, nothing is shown.  The screen will be updated
 "often, this is only useful on fast terminals.
 set incsearch
 
-"Avoid showing many @ for long lines  
-set display+=lastline
+"When there is a previous search pattern, highlight all its matches.
+"When you get bored looking at the highlighted matches, you can turn it
+"off with |:nohlsearch|.  This does not change the option value, as
+set hlsearch
 
+" avoid showing many @ for long lines  
+set display+=lastline
 
 "set spell
 
 
-"Encoding set
+" encoding set
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
 
 "Shown the line number 
 set number
 
-"set tabstop=4
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+"set smartindent
 
 set foldenable			"Enable folding
 set foldlevelstart=10 	"Open most of the folds by default. If set to 0, all folds will be closed.
@@ -69,6 +72,10 @@ set foldmethod=manual		"Define the type of folding.
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
 
+"For Unix and Win32, if a directory ends in two path separators "//",
+"the backup file name will be built from the complete path to the
+"file with all path separators changed to percent '%' signs. This
+"will ensure file name uniqueness in the backup directory.
 set directory=$HOME/.vim/swp//
 
 set backupdir=~/.vim/.backup//
@@ -78,89 +85,158 @@ set undodir =~/.vim/.undo//
 
 set dictionary+=~/.vim/dictionary/dic.txt
 
-"Ctags search
-set tags=./tags;,tags
-
+" ctags search
+set tags=./tags;,tags " 当前目录寻找ctags，找不到会往上级目录寻找
+set tags+=~/.ctags/uvm_1_1_d_ctags
 
 syntax enable
 
+filetype plugin indent on
+
 "filetype on		" required
-filetype off		" required
+"filetype off		" required
+
+"set guifont=FiraCode\ Nerd\ Font\ Medium\ 12 
+
+set guifont=FiraCode\ Nerd\ Font\ Medium\ 14
 
 set runtimepath+=~/.vim/myOwnsnippets/
-set runtimepath+=~/.vim/plugged/vim-snippets/UltiSnips/
+"set runtimepath+=~/.vim/plugged/vim-snippets/UltiSnips/
 
 
-"Specify a directory for plugins
-"- For Neovim: stdpath('data') . '/plugged'
-"- Avoid using standard Vim directory names like 'plugin'
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-"Make sure you use single quotes
+" Make sure you use single quotes
 
-"Multiple Plug commands can be written in a single line using | separators
+" Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
+
 Plug 'wakatime/vim-wakatime'
 
+"Plug 'ryanoasis/vim-devicons'
+
+Plug 'preservim/nerdtree'
+
+Plug 'adelarsq/vim-matchit'
+
+"Plug 'skywind3000/vim-auto-popmenu'
+
+Plug 'vim-scripts/AutoComplPop'
+
+" Plug 'pacha/vem-tabline'
+
+" systerm verilog
+"Plug 'vhda/verilog_systemverilog.vim'
+
+" Markdown Plugin
+"Plug 'godlygeek/tabular' | Plug 'preservim/vim-markdown'
 
 
-"Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
 
-"Any valid git URL is allowed
+" Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
-"On-demand loading
+" On-demand loading
 "Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-"Using a non-default branch
+" Using a non-default branch
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-"Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 "Plug 'fatih/vim-go', { 'tag': '*' }
 
-"Plugin options
+" Plugin options
 "Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
-"Plugin outside ~/.vim/plugged with post-update hook
+" Plugin outside ~/.vim/plugged with post-update hook
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': {-> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-"Unmanaged plugin (manually installed and updated)
+" Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
 
-"Initialize plugin system
+" Initialize plugin system
 call plug#end()
 
 
 let g:tex_flavor='latex'
 
-"let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
+let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
 "let g:vimtex_compiler_latexrun_engines ={'_':'xelatex'}
-
+let g:vimtex_compiler_latexmk = {
+                    \ 'continuous' : 1,
+                    \ 'executable' : 'latexmk',
+                    \ 'options': [
+                    \ '-verbose',
+                    \ '-shell-escape',
+                    \ '-interaction=nonstopmode',
+                    \ ],
+            \}
 
 "let g:vimtex_compiler_latexmk_engines = {'_':'-pdflatex'}
 "let g:vimtex_compiler_latexrun_engines ={'_':'pdflatex'}
 
-let g:vimtex_compiler_latexmk_engines = {'_':'-lualatex'}
-let g:vimtex_compiler_latexrun_engines ={'_':'lualatex'}
+"let g:vimtex_compiler_latexmk_engines = {'_':'-lualatex'}
+"let g:vimtex_compiler_latexrun_engines ={'_':'lualatex'}
 
 
 let g:vimtex_view_method='zathura'
-let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+"let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
 
 let g:vimtex_quickfix_mode=0
 
 "UltiSnips Setting
-
 let g:UltiSnipsSnippetDirectories=["UltiSnips","myOwnsnippets"]
-
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 
+" Netrw Setting
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_liststyle = 3
+
+
+" Markdown 
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_math = 1
+
+" AutoComplPop
+let g:acp_completeOption = '.,w,b,k'
+
+" To enable conceal use Vim's standard conceal configuration
+set conceallevel=0
+
+" Key Mapping
+nmap ,t :Toc<CR> 
+
+" Netrw
+"nmap <F4> :Lexplore<CR>
+
+" NERDTree
+nmap <F4> :NERDTreeToggle<CR>
+
+" skywind3000/vim-auto-popmenu 
+let g:apc_enable_ft = {'text':1, 'markdown':1, 'verilog':1, 'systemverilog':1}
+
+" source for dictionary, current or other loaded buffers, see ':help cpt'
+"set complete=.,k,w,b,u,t,i
+set complete=.,k,w,b
+
+" don't select the first item.
+set completeopt=menu,menuone,noselect
+
+"When on, Vim will change the current working directory whenever you
+"open a file, switch buffers, delete a buffer or open/close a window.
+set autochdir
+
